@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  customers-service:
+    image: customers-service
+    container_name: customers-service
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: src/AwesomeShop.Services.Customers.Api/Dockerfile
+      args:
+        - configuration=Debug
+    ports:
+      - 5002:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ~/.vsdbg:/remote_debugger:rw
+    networks:
+      - ashop
+
+networks:
+  ashop:
+    name: ashop
+    external: true

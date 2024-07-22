@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  customers-service:
+    image: customers-service
+    container_name: customers-service
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: src/AwesomeShop.Services.Customers.Api/Dockerfile
+    ports:
+      - 5002:80
+    networks:
+      - mcourse
+
+networks:
+  mcourse:
+    name: mcourse
